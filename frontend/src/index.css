@@ -3,6 +3,39 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@font-face {
+  font-family: 'CopperplateGothic';
+  src: url('/fonts/Copperplate-Gothic-Std-30-AB.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Capriola';
+  src: url('/fonts/Capriola-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('/fonts/Roboto-VariableFont_wdth\,wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.copper-font {
+  font-family: 'CopperplateGothic', sans-serif;
+}
+
+.capriola-font {
+  font-family: 'Capriola', sans-serif;
+}
+
+.roboto-font{
+  font-family: 'Roboto', sans-serif;
+}
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);

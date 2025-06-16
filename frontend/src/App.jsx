@@ -1,12 +1,21 @@
 import './App.css'
-import { Button } from './components/ui/button'
+import { Footer } from './components/Footer'
+import { Navabar } from './components/Navbar'
+import { HomePage } from './pages/HomePage'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <>
-      <h1 className='text-3xl text-pink-400 font-semibold'>Hello World</h1>
-      <Button>Click me</Button>
-    </>
+    <div className='bg-background'>
+      <Router>
+        <Navabar />
+        <Routes>
+          <Route path='/' element={<HomePage />}></Route>
+        </Routes>
+        <Footer />
+      </Router>
+
+    </div>
   )
 }
 
