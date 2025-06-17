@@ -13,7 +13,7 @@ const iconMap = {
 export const Card = ({color, bgColor, heading, content, icon}) => {
   const Icon = iconMap[icon] || Users;
   return (
-    <div className="bg-white dark:bg-transparent rounded-xl p-6 pr-0 pb-6 shadow-sm border border-gray-100 dark:border-gray-800 dark:shadow-gray-950 dark:shadow-md hover:shadow-md transition-shadow duration-200">
+    <div className="bg-white dark:bg-[#212121] rounded-xl p-6 pr-0 pb-6 shadow-sm border border-gray-100 dark:border-[#383838] dark:shadow-[#383838]] dark:shadow-md hover:shadow-md transition-shadow duration-200">
       <div className="flex flex-col gap-4 items-start">
         {/* Icon Container */}
         <div className="flex-shrink-0">
