@@ -1,39 +1,46 @@
 import mongoose from "mongoose";
-import validator from "validator";
 
 const userSchema = new mongoose.Schema({
     handle: {
         type: String,
-        required: true
+        required: true,
+        unique: true,
+        trim: true
     },
     email: {
-        type: String
+        type: String,
+        default: ''
     },
     firstName: {
         type: String,
+        default: ''
     },
     lastName: {
         type: String,
+        default: ''
     },
     rank: {
         type: String,
-        required: true
+        required: true,
+        default: 'unrated'
     },
     rating: {
         type: Number,
         required: true,
+        default: 0
     },
     maxRating: {
         type: Number,
-        required: true
+        required: true,
+        default: 0
     },
     avatar: {
         type: String,
-        required: true
+        default: ''
     },
     lastSyncTime: {
         type: Date,
-        default: Date.now()
+        default: Date.now
     }
 }, {
     timestamps: true

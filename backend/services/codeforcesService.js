@@ -3,7 +3,7 @@ import axios from "axios";
 class CodeforcesService {
     constructor() {
         this.baseURL = 'https://codeforces.com/api';
-        this.rateLimitDelay = 2000; // 2 second between requests because codeforces allows only 1 request per 2 seconds
+        this.rateLimitDelay = 2200; // 2 second between requests because codeforces allows only 1 request per 2 seconds
     }
 
     async fetchUserInfo(handle) {
