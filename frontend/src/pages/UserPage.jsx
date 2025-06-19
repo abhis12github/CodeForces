@@ -7,6 +7,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Alert, AlertDescription } from "../components/ui/alert";
 import { Download, Plus, MoreHorizontal, UserPlus, Users, Loader2, AlertCircle } from "lucide-react";
 import axios from 'axios';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 // Codeforces rank colors mapping
 const rankColors = {
@@ -28,6 +29,9 @@ const getRankColor = (rank) => {
 
 
 export const UserPage = () => {
+
+    const navigate=useNavigate();
+    
     const [users, setUsers] = useState([]);
     const [filteredUsers, setFilteredUsers] = useState([]);
     const [filterText, setFilterText] = useState('');
@@ -155,7 +159,7 @@ export const UserPage = () => {
 
     // Export as CSV
     const handleExportCSV = () => {
-        const headers = ['Handle', 'Name', 'Email', 'Rank', 'Rating', 'Max Rating'];
+        const headers = ['Handle', 'Name', 'Email', 'Rank', 'Rating', 'Max Rating', 'Last Synced On'];
         const csvContent = [
             headers.join(','),
             ...filteredUsers.map(user => [
@@ -164,7 +168,8 @@ export const UserPage = () => {
                 user.email || '',
                 user.rank || '',
                 user.rating || '',
-                user.maxRating || ''
+                user.maxRating || '',
+                user.lastSyncTime
             ].join(','))
         ].join('\n');
 
@@ -193,6 +198,8 @@ export const UserPage = () => {
             </div>
         );
     }
+
+    
 
     return (
         <div className="p-8 border-gray-200 dark:border-[#232424] border-[1.5px] rounded-xl m-10 flex flex-col gap-8 min-h-screen">
@@ -298,8 +305,9 @@ export const UserPage = () => {
                                 <TableHead className="w-48 text-center capriola-font">Name</TableHead>
                                 <TableHead className="w-48 text-center capriola-font">Email</TableHead>
                                 <TableHead className="w-48 text-center capriola-font">Rank</TableHead>
-                                <TableHead className="w-48 text-center capriola-font">Rating</TableHead>
-                                <TableHead className="w-48 text-center capriola-font">Max Rating</TableHead>
+                                <TableHead className="w-24 text-center capriola-font">Rating</TableHead>
+                                <TableHead className="w-24 text-center capriola-font">Max Rating</TableHead>
+                                <TableHead className="w-48 text-center capriola-font">Last Synced On</TableHead>
                                 <TableHead className="w-48 text-center capriola-font">Actions</TableHead>
                             </TableRow>
                         </TableHeader>
@@ -334,11 +342,14 @@ export const UserPage = () => {
                                             </span>
                                         </div>
                                     </TableCell>
-                                    <TableCell className="w-48 text-center font-normal copper-font">
+                                    <TableCell className="w-24 text-center font-normal copper-font">
                                         {user.rating || '-'}
                                     </TableCell>
-                                    <TableCell className=" w-48 text-center font-normal copper-font">
+                                    <TableCell className=" w-24 text-center font-normal copper-font">
                                         {user.maxRating || '-'}
+                                    </TableCell>
+                                    <TableCell className=" w-48 text-center font-normal copper-font">
+                                        {new Date(user.lastSyncTime).toLocaleString()}
                                     </TableCell>
                                     <TableCell className="w-48 text-center">
                                         <DropdownMenu>
@@ -348,7 +359,7 @@ export const UserPage = () => {
                                                 </Button>
                                             </DropdownMenuTrigger>
                                             <DropdownMenuContent align="end">
-                                                <DropdownMenuItem onClick={() => window.open(`https://codeforces.com/profile/${user.handle}`, '_blank')}>
+                                                <DropdownMenuItem onClick={() => navigate(`/profile/${user.handle}`)}>
                                                     View Profile
                                                 </DropdownMenuItem>
                                                 <DropdownMenuItem onClick={() => handleOpenUpdateDialog(user)}>
@@ -363,7 +374,6 @@ export const UserPage = () => {
                                             </DropdownMenuContent>
                                         </DropdownMenu>
 
-                                        {/* ✅ Move the Dialog OUTSIDE the Dropdown */}
                                         <Dialog open={isUpdateDialogOpen} onOpenChange={setIsUpdateDialogOpen}>
                                             <DialogContent>
                                                 <DialogHeader>

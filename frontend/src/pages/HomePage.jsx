@@ -1,6 +1,7 @@
-import { Card } from "../components/ui/card";
+import { Card } from "../components/FeatureCard";
 import { Award } from "lucide-react";
-import { ArrowRight} from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const HomePage = () => {
     return (
@@ -25,9 +26,11 @@ export const HomePage = () => {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <button className="bg-[#415e9c] hover:bg-[#415e9c]/90 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg flex gap-1 roboto-font">
-                            Get Started <ArrowRight/>
-                        </button>
+                        <Link to="/users">
+                            <button className="bg-[#415e9c] hover:bg-[#415e9c]/90 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg flex gap-1 roboto-font">
+                                Get Started <ArrowRight />
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </section>
@@ -58,7 +61,7 @@ export const HomePage = () => {
                                 content="Automated daily data synchronization with Codeforces to keep all information up-to-date."
                             />
                         </div>
-                     
+
                         <div className="w-full max-w-xs">
                             <Card
                                 icon="Mail"

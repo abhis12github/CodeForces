@@ -38,6 +38,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: ''
     },
+    friends:{
+        type:Number,
+        default: 0
+    },
     lastSyncTime: {
         type: Date,
         default: Date.now

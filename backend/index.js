@@ -3,6 +3,7 @@ import cors from "cors";
 import dbConnect from "./db/connection.js";
 import { PORT, FRONTEND_URL } from "./config/serverConfig.js";
 import { router as apiRoutes } from "./routes/index.js";
+import { setupCronJobs } from "./utils/job.js";
 
 const setUpAndStartServer=async()=>{
     const app=express();
@@ -22,6 +23,8 @@ const setUpAndStartServer=async()=>{
 
     // connect to mongo database
     await dbConnect();
+
+    setupCronJobs();
 
     // set the server at port
     app.listen(PORT,()=>{

@@ -1,37 +1,101 @@
-import { Users } from 'lucide-react';
-import React from 'react';
-import { Mail,Target,Clock,Calendar,BarChart3 } from 'lucide-react';
+import * as React from "react"
 
-const iconMap = {
-  BarChart3,
-  Clock,
-  Mail,
-  Target,
-  Calendar
-};
+import { cn } from "@/lib/utils"
 
-export const Card = ({color, bgColor, heading, content, icon}) => {
-  const Icon = iconMap[icon] || Users;
+function Card({
+  className,
+  ...props
+}) {
   return (
-    <div className="bg-white dark:bg-[#212121] rounded-xl p-6 pr-0 pb-6 shadow-sm border border-gray-100 dark:border-[#383838] dark:shadow-[#383838]] dark:shadow-md hover:shadow-md transition-shadow duration-200">
-      <div className="flex flex-col gap-4 items-start">
-        {/* Icon Container */}
-        <div className="flex-shrink-0">
-          <div className={`${bgColor} w-12 h-12 rounded-full flex items-center justify-center`}>
-            <Icon className={`${color} w-6 h-6`}  />
-          </div>
-        </div>
-        
-        {/* Content */}
-        <div className="flex-1 min-w-0">
-          <h3 className="font-semibold text-lg text-gray-900 dark:text-white mb-2 capriola-font ">
-            {heading}
-          </h3>
-          <p className="text-gray-600 dark:text-gray-300 text-sm roboto-font">
-            {content}
-          </p>
-        </div>
-      </div>
-    </div>
+    (<div
+      data-slot="card"
+      className={cn(
+        "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm",
+        className
+      )}
+      {...props} />)
   );
-};
+}
+
+function CardHeader({
+  className,
+  ...props
+}) {
+  return (
+    (<div
+      data-slot="card-header"
+      className={cn(
+        "@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6",
+        className
+      )}
+      {...props} />)
+  );
+}
+
+function CardTitle({
+  className,
+  ...props
+}) {
+  return (
+    (<div
+      data-slot="card-title"
+      className={cn("leading-none font-semibold", className)}
+      {...props} />)
+  );
+}
+
+function CardDescription({
+  className,
+  ...props
+}) {
+  return (
+    (<div
+      data-slot="card-description"
+      className={cn("text-muted-foreground text-sm", className)}
+      {...props} />)
+  );
+}
+
+function CardAction({
+  className,
+  ...props
+}) {
+  return (
+    (<div
+      data-slot="card-action"
+      className={cn(
+        "col-start-2 row-span-2 row-start-1 self-start justify-self-end",
+        className
+      )}
+      {...props} />)
+  );
+}
+
+function CardContent({
+  className,
+  ...props
+}) {
+  return (<div data-slot="card-content" className={cn("px-6", className)} {...props} />);
+}
+
+function CardFooter({
+  className,
+  ...props
+}) {
+  return (
+    (<div
+      data-slot="card-footer"
+      className={cn("flex items-center px-6 [.border-t]:pt-6", className)}
+      {...props} />)
+  );
+}
+
+export {
+  Card,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardAction,
+  CardDescription,
+  CardContent,
+}
